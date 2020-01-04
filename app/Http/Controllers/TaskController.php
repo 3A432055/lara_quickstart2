@@ -78,9 +78,12 @@ class TaskController extends Controller
     */
     public function store(Request $request)
     {
+        //驗證接收到的表單輸入並建立新的任務
+        //讓 name 欄位為必填，且它必須少於 255 字元
         $this->validate($request, [
             'name' => 'required|max:255',
         ]);
+        //建立任務
         $request->user()->tasks()->create([
             'name' => $request->name,
         ]);
