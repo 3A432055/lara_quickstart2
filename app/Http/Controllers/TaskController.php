@@ -25,6 +25,7 @@ class TaskController extends Controller
         $this->middleware('auth');
           $this->tasks = $tasks;
     }
+     //檢查使用者的認證，
     /**
      * 顯示使用者所有任務的清單。
      *
@@ -33,11 +34,14 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        $tasks = Task::where('user_id', $request->user()->id)->get();
-        //$tasks= auth()->user()->tasks;
-        // $tasks= auth()->user()->tasks()->get();
+       // $tasks = Task::where('user_id', $request->user()->id)->get();
+       // $tasks=auth()->user()->tasks()->get();
+        // $tasks=auth()->user()->tasks()->get();
         // $tasks=Auth::user()->tasks;
         // $tasks=Auth::user()->tasks()->get();
+
+        $tasks=Auth::user()->tasks()->paginate(4);
+        //dd($tasks);
         return view('tasks.index', [
             'tasks' => $tasks,
         ]);

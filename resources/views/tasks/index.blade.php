@@ -72,6 +72,7 @@
                     </tbody>
                 </table>
             </div>
+            {{$tasks->links()}}
         </div>
     @endif
 @endsection
